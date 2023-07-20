@@ -4,7 +4,7 @@ const app = express()
 const MongoClient = require('mongodb').MongoClient
 
 MongoClient.connect('mongodb-connection-string',(err, client) => {
-    
+    // .... do something here
 })
 
 app.use(bodyParser.urlencoded({extended: true}))
