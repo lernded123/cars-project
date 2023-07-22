@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 const app = express()
 const MongoClient = require('mongodb').MongoClient
 
-MongoClient.connect('mongodb')
+MongoClient.connect('mongodb-connection')
 
 app.use(bodyParser.urlencoded({extended: true}))
 
