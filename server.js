@@ -10,7 +10,7 @@ app.get('/',(request,response) => {
     
 })
 
-app.post('/quotes', (req,res) => {
+app.post('/carBrands', (req,res) => {
     console.log(req.body);
 })
 
