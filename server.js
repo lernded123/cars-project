@@ -12,6 +12,8 @@ app.get('/',(request,response) => {
 
 app.post('/carBrands', (req,res) => {
     console.log(req.body);
+
+    res.send('Received the car brand')
 })
 
 app.listen(3000, function(){
