@@ -3,24 +3,36 @@ const bodyParser = require('body-parser')
 const app = express()
 const MongoClient = require('mongodb').MongoClient
 
-MongoClient.connect('mongodb-connection-string',(err, client) => {
-    // .... do something here
-})
+const mongoURL = 'mongodb+srv://goodlifesam:JCE3d7uyQBFt0yVP@cluster0.l1z33ll.mongodb.net/?retryWrites=true&w=majority'
 
-app.use(bodyParser.urlencoded({extended: true}))
+MongoClient.connect( mongoURL, )
+    .then(client => {
+        console.log('Connected to Database');
+        const db = client.db('CarModelsAPI')
+        const carCollection = db.collection('carBrands')
+
+        app.use(bodyParser.urlencoded({extended: true}))
 
 
-app.get('/',(request,response) => {
-  response.sendFile(__dirname + '/index.html')
+        app.get('/',(request,response) => {
+        response.sendFile(__dirname + '/index.html')
     
-})
+        })
 
-app.post('/carBrands', (req,res) => {
-    console.log(req.body);
+        app.post('/carBrands', (req,res) => {
+            carCollection
+                .insertOne(req.body)
+                .then(result => {
+                    res.redirect('/');
+                })
+                .catch(error => console.error(error))
+        })
 
-    res.send('Received the car brand')
-})
+        app.listen(3000, function(){
+        console.log('listening on 3000');
+        })
 
-app.listen(3000, function(){
-    console.log('listening on 3000');
-})
+        })
+        .catch(error => console.error(error))
+
+
