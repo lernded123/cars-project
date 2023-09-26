@@ -5,7 +5,7 @@ const MongoClient = require('mongodb').MongoClient
 
 const mongoURL = 'mongodb+srv://goodlifesam:JCE3d7uyQBFt0yVP@cluster0.l1z33ll.mongodb.net/?retryWrites=true&w=majority'
 
-MongoClient.connect( mongoURL, )
+MongoClient.connect(mongoURL)
     .then(client => {
         console.log('Connected to Database');
         const db = client.db('CarModelsAPI')
@@ -26,7 +26,9 @@ MongoClient.connect( mongoURL, )
                     res.redirect('/');
                 })
                 .catch(error => console.error(error))
-        })
+                res.status(500).send('Error inserting data');
+        });
+   
 
         app.listen(3000, function(){
         console.log('listening on 3000');
